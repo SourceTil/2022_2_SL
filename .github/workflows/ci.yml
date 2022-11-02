@@ -9,18 +9,11 @@ env:
 jobs: 
   build-debug: 
     runs-on: ubuntu-latest 
+    container: hareshutit/sourcetill
  
     steps: 
     - name: Checkout repository
       uses: actions/checkout@v3 
-
-    - name: Install clang-tidy
-      working-directory: ${{github.workspace}}       
-      run: sudo apt install -y clang-tidy
-
-    - name: Install clang-format
-      working-directory: ${{github.workspace}}        
-      run: sudo apt install -y clang-format
  
     - name: Build
       working-directory: ${{github.workspace}} 
@@ -33,10 +26,6 @@ jobs:
     - name: Lint 
       working-directory: ${{github.workspace}} 
       run: make lint
- 
-    - name: Install lcov         
-      run: |          
-          sudo apt-get install -y lcov
           
     - name: Run coverage analyse
       run: |
@@ -53,7 +42,8 @@ jobs:
         path: build_debug/report/*
 
   build-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
+    container: hareshutit/sourcetill
 
     steps:
     - name: Checkout repository
@@ -66,10 +56,6 @@ jobs:
     - name: Test
       working-directory: ${{github.workspace}} 
       run: make test-release
-
-    - name: Install lcov
-      run: |
-          sudo apt-get install -y lcov
     
     - name: Run coverage analyse
       run: |

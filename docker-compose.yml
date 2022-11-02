@@ -1,11 +1,11 @@
-version: "3.8"
+version: "1.0"
 
 services:
   dummy:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: dummy
+    container_name: source_till
     ports:
       - "8000:8000"
     working_dir: /code

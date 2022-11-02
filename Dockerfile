@@ -1,12 +1,9 @@
-FROM leshiy1295/gcc_linters_valgrind_cmake_gtest
+FROM ubuntu:22.04
 
-WORKDIR /code/
+RUN apt-get update
 
-COPY src ./src
+RUN apt install -y clang-tidy
 
-COPY test ./test
+RUN apt-get install -y lcov
 
-COPY include ./include
-
-COPY Makefile .
-
+RUN apt install -y clang-format
