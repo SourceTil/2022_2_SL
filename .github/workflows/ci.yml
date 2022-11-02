@@ -9,7 +9,7 @@ env:
 jobs: 
   build-debug: 
     runs-on: ubuntu-latest 
-    container: hareshutit/sourcetill
+    container: hareshutit/sourcetill:v1
  
     steps: 
     - name: Checkout repository
@@ -43,7 +43,7 @@ jobs:
 
   build-release:
     runs-on: ubuntu-latest 
-    container: hareshutit/sourcetill
+    container: hareshutit/sourcetill:v1
 
     steps:
     - name: Checkout repository
