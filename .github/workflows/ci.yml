@@ -7,7 +7,7 @@ env:
   BUILD_TYPE: Debug 
  
 jobs: 
-  build: 
+  build-debug: 
     runs-on: ubuntu-latest 
  
     steps: 
@@ -51,4 +51,39 @@ jobs:
       with:
         name: Coverage
         path: build_debug/report/*
+
+  build-release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Build
+      working-directory: ${{github.workspace}} 
+      run: make build-release
+
+    - name: Test
+      working-directory: ${{github.workspace}} 
+      run: make test-release
+
+    - name: Install lcov
+      run: |
+          sudo apt-get install -y lcov
+    
+    - name: Run coverage analyse
+      run: |
+          cd build_release && lcov -t "SourceTil" -o coverage.info -c -d ./
+
+    - name: Get coverage page
+      run: |
+          cd build_release && genhtml -o report coverage.info
+
+    - name: Load coverage result
+      uses: actions/upload-artifact@v3
+      with:
+        name: Coverage
+        path: build_release/report/*
+ 
+
  
