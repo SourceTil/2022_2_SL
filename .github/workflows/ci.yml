@@ -28,17 +28,20 @@ jobs:
       run: make lint
           
     - name: Run coverage analyse
+      working-directory: ${{github.workspace}}/build_debug
       run: |
-          cd build_debug && lcov -t "SourceTil" -o coverage.info -c -d ./
+          lcov -t "SourceTil" -o coverage.info -c -d /CMakeFiles/SourceTil_objs.dir/src/
+          lcov --remove coverage.info -o coverage.info '/usr/include/*' 
 
     - name: Get coverage page
+      working-directory: ${{github.workspace}}/build_debug
       run: |
-          cd build_debug && genhtml -o report coverage.info
+          genhtml -o report coverage.info
  
     - name: Load coverage result
       uses: actions/upload-artifact@v3
       with:
-        name: Coverage
+        name: Coverage_debug
         path: build_debug/report/*
 
   build-release:
@@ -58,17 +61,20 @@ jobs:
       run: make test-release
     
     - name: Run coverage analyse
+      working-directory: ${{github.workspace}}/build_release
       run: |
-          cd build_release && lcov -t "SourceTil" -o coverage.info -c -d ./
+          lcov -t "SourceTil" -o coverage.info -c -d /CMakeFiles/SourceTil_objs.dir/src/
+          lcov --remove coverage.info -o coverage.info '/usr/include/*'
 
     - name: Get coverage page
+      working-directory: ${{github.workspace}}/build_release
       run: |
-          cd build_release && genhtml -o report coverage.info
+          genhtml -o report coverage.info
 
     - name: Load coverage result
       uses: actions/upload-artifact@v3
       with:
-        name: Coverage
+        name: Coverage_release
         path: build_release/report/*
  
 
