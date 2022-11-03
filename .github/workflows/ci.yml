@@ -30,7 +30,7 @@ jobs:
     - name: Run coverage analyse
       working-directory: ${{github.workspace}}/build_debug
       run: |
-          lcov -t "SourceTil" -o coverage.info -c -d /CMakeFiles/SourceTil_objs.dir/src/
+          lcov -t "SourceTil" -o coverage.info -c -d ./CMakeFiles/SourceTil_objs.dir/src/
           lcov --remove coverage.info -o coverage.info '/usr/include/*' 
 
     - name: Get coverage page
@@ -63,7 +63,7 @@ jobs:
     - name: Run coverage analyse
       working-directory: ${{github.workspace}}/build_release
       run: |
-          lcov -t "SourceTil" -o coverage.info -c -d /CMakeFiles/SourceTil_objs.dir/src/
+          lcov -t "SourceTil" -o coverage.info -c -d ./CMakeFiles/SourceTil_objs.dir/src/
           lcov --remove coverage.info -o coverage.info '/usr/include/*'
 
     - name: Get coverage page
