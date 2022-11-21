@@ -15,6 +15,9 @@ include_directories(include)
 add_library(${PROJECT_NAME}_objs OBJECT
 	src/calculation.cpp
 	include/calculation.hpp
+	include/Config.hpp
+	include/IdleManager.hpp
+	src/IdleManager.cpp
 )
 
 # The Service
@@ -34,6 +37,9 @@ FetchContent_MakeAvailable(googletest)
 
 # Unit Tests
 add_subdirectory(test)
+
+# Mocks
+add_subdirectory(test/mocks)
 
 if(DEFINED ENV{PREFIX})
 	message(STATUS "Set install prefix: $ENV{PREFIX}")
