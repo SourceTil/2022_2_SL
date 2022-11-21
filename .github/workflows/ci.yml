@@ -21,6 +21,10 @@ jobs:
     - name: Install clang-format
       working-directory: ${{github.workspace}}        
       run: sudo apt install -y clang-format
+
+    - name: Install nlohmann-json
+      working-directory: ${{github.workspace}}        
+      run: sudo apt install -y nlohmann-json-dev
  
     - name: Build
       working-directory: ${{github.workspace}} 
