@@ -26,6 +26,10 @@ jobs:
       working-directory: ${{github.workspace}}        
       run: sudo apt install -y nlohmann-json3-dev
  
+    - name: Install GMock
+      working-directory: ${{github.workspace}}        
+      run: sudo apt-get install -y google-mock
+
     - name: Build
       working-directory: ${{github.workspace}} 
       run: make build-debug
