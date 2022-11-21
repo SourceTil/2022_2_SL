@@ -1,14 +1,17 @@
 /* Copyright 2022 S L */
 #include <chrono>
 #include <string>
+
 #include "Config.hpp"
 #include "IdleManager.h"
-#include "gtest/gtest.h"
 #include "gmock/gmock.h"
+#include "gtest/gtest.h"
 
 using milliseconds = std::chrono::milliseconds;
 
-class MockIdleManager : public IIdleManager {
+// mock tests for IdleManager and Config
+
+class MockIdleManager : public IdleManager {
  public:
   MOCK_METHOD(milliseconds, takeSleepTime, (), (override));
   MOCK_METHOD(void, process_idling, (), (override));
@@ -21,21 +24,18 @@ class MockConfig : public Config {
               (override));
 };
 
+// test for IdleManager
 TEST(IdleManager, takeSleepTime) {
-  MockIdleManager mock_idle_manager;
-  EXPECT_CALL(mock_idle_manager, takeSleepTime()).Times(1)
+  MockIdleManager mockIdleManager;
+  EXPECT_CALL(mockIdleManager, takeSleepTime()).Times(1);
+  mockIdleManager.takeSleepTime();
 }
 
-TEST(IdleManager, process_idling) {
-  MockIdleManager mock;
-  EXPECT_CALL(mock, process_idling()).Times(1);
-  mock.process_idling();
-}
-
+// test for Config
 TEST(Config, get_value) {
-  MockConfig mock;
-  EXPECT_CALL(mock, get_value<std::string>("service", "name")).Times(1);
-  mock.get_value<std::string>("service", "name");
+  MockConfig mockConfig;
+  EXPECT_CALL(mockConfig, get_value<std::string>("service", "name")).Times(1);
+  mockConfig.get_value<std::string>("service", "name");
 }
 
 int main(int argc, char** argv) {

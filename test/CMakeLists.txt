@@ -17,7 +17,7 @@ target_link_libraries(${PROJECT_NAME}_unittest
 )
 
 target_link_libraries(${PROJECT_NAME}_mocks
-GTest::gmock_main
+  GTest::gmock_main
   ${PROJECT_NAME}_objs
 )
 
