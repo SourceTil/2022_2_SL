@@ -3,7 +3,7 @@
 #include <string>
 
 #include "Config.hpp"
-#include "IdleManager.h"
+#include "IdleManager.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
