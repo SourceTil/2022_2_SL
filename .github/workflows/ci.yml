@@ -25,6 +25,10 @@ jobs:
     - name: Install nlohmann-json
       working-directory: ${{github.workspace}}        
       run: sudo apt install -y nlohmann-json3-dev
+
+    - name: Install GMock
+      working-directory: ${{github.workspace}}        
+      run: sudo apt install -y libgmock-dev
  
     - name: Build
       working-directory: ${{github.workspace}} 

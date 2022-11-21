@@ -23,9 +23,7 @@ class MockConfig : public Config {
 
 TEST(IdleManager, takeSleepTime) {
   MockIdleManager mock_idle_manager;
-  EXPECT_CALL(mock_idle_manager, takeSleepTime())
-      .Times(1)
-      .WillOnce(testing::Return(milliseconds(1)));
+  EXPECT_CALL(mock_idle_manager, takeSleepTime()).Times(1)
 }
 
 TEST(IdleManager, process_idling) {
