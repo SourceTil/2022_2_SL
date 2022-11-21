@@ -4,7 +4,7 @@
 #include "Config.hpp"
 #include "IdleManager.h"
 #include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#include "gtest/gmock.h"
 
 using milliseconds = std::chrono::milliseconds;
 
