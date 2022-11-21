@@ -1,5 +1,5 @@
 /* Copyright 2022 Krainikov Ivan */
-#include "IdleManager.h"
+#include "IdleManager.hpp"
 
 #include <chrono>
 

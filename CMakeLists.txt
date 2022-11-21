@@ -16,7 +16,7 @@ add_library(${PROJECT_NAME}_objs OBJECT
 	src/calculation.cpp
 	include/calculation.hpp
 	include/Config.hpp
-	include/IdleManager.h
+	include/IdleManager.hpp
 	src/IdleManager.cpp
 )
 
