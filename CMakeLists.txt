@@ -15,10 +15,15 @@ include_directories(include)
 add_library(${PROJECT_NAME}_objs OBJECT
 	src/calculation.cpp
 	include/calculation.hpp
+	include/component_list.hpp
+	include/component.hpp
+	include/demon_main.hpp
+	include/message_manager.hpp
+	include/message.hpp
 )
 
 # The Service
-add_executable(${PROJECT_NAME} src/main.cpp)
+# add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs )
 
 # Tests include sector
