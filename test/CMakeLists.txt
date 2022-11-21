@@ -14,5 +14,6 @@ target_link_libraries(${PROJECT_NAME}_unittest
 )
 
 include(GoogleTest)
+include(GoogleMock)
 gtest_discover_tests(${PROJECT_NAME}_unittest)
 
