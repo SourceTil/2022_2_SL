@@ -38,6 +38,9 @@ FetchContent_MakeAvailable(googletest)
 # Unit Tests
 add_subdirectory(test)
 
+# Mocks
+add_subdirectory(test/mocks)
+
 if(DEFINED ENV{PREFIX})
 	message(STATUS "Set install prefix: $ENV{PREFIX}")
 	file(TO_CMAKE_PATH "$ENV{PREFIX}" PREFIX_PATH)
