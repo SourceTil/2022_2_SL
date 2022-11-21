@@ -4,8 +4,8 @@ project(SourceTil CXX)
 enable_testing()
 
 add_executable(${PROJECT_NAME}_unittest
-    test.cpp
     mocks/mocks.cpp
+    test.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}_unittest
@@ -14,6 +14,4 @@ target_link_libraries(${PROJECT_NAME}_unittest
 )
 
 include(GoogleTest)
-include(GoogleMock)
 gtest_discover_tests(${PROJECT_NAME}_unittest)
-
