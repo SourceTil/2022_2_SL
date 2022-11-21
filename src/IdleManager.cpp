@@ -3,7 +3,8 @@
 
 #include <chrono>
 
-IdleManager::IdleManager() { last_call_time = 1; }
+// 1 ms into last_call_time
+IdleManager::IdleManager() { last_call_time = milliseconds(1); }
 
 milliseconds IdleManager::takeSleepTime() {
   last_call_time *= 2;
