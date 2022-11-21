@@ -37,3 +37,9 @@ TEST(Config, get_value) {
   EXPECT_CALL(mock, get_value<std::string>("service", "name")).Times(1);
   mock.get_value<std::string>("service", "name");
 }
+
+int main(int argc, char** argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  ::testing::InitGoogleMock(&argc, argv);
+  return RUN_ALL_TESTS();
+}
