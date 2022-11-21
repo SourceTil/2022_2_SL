@@ -14,5 +14,12 @@ class ComponentList {
     RunAll(Config);
 
     private:
-    std::vector<Component>
+    std::vector<Component> components;
+}
+
+ConponentList::ComponentList = default;
+
+template <classtype T>
+ComponentList::Append<T>(std::string name = T.kName){
+    this.components.push();
 }
