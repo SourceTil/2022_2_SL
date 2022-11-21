@@ -17,7 +17,7 @@ add_library(${PROJECT_NAME}_objs OBJECT
 	include/calculation.hpp
 	include/Config.hpp
 	include/IdleManager.h
-	include/IdleManager.cpp
+	src/IdleManager.cpp
 )
 
 # The Service
