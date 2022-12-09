@@ -1,4 +1,3 @@
-#include <gtest/gtest.h>
 #include "mocks.cpp"
 
 int main(int argc, char **argv) {

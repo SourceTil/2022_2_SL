@@ -1,18 +1,9 @@
+
+#pragma once
 #include <string>
 
-// виртуальный класс сообщения
-class VirtualMessage {
+class IMessage {
 public:
-    VirtualMessage() {}
-    virtual ~VirtualMessage() {}
-};
-
-// класс сообщения
-class Message : public VirtualMessage {
-public:
-    Message() = default;
-    ~Message() override = default;
-    std::string getMessage() {
-        return "Message";
-    }
+    virtual ~IMessage() {}
+    virtual std::string getMessage() = 0;
 };

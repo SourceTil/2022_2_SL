@@ -1,5 +1,5 @@
-CMAKE_DEBUG_FLAGS ?= CMAKE_EXPORT_COMPILE_COMMANDS=ON
-CMAKE_RELEASE_FLAGS ?= CMAKE_EXPORT_COMPILE_COMMANDS=ON
+# CMAKE_DEBUG_FLAGS ?= -DMAKE_EXPORT_COMPILE_COMMANDS=ON
+# CMAKE_RELEASE_FLAGS ?= -DMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 HEADER_DIR = ./include/
 SOURCE_DIR = ./src/
@@ -10,13 +10,13 @@ UNITTESTS_NAME = SourceTil_unittest
 
 .PHONY: all clean cleam-dist test-debug test-release build-debug build-release
 
-all: test-debug test-release
+all: test-debug
 
 build-debug:
-	@cmake -B build_debug -DCMAKE_BUILD_TYPE=Debug $(CMAKE_DEBUG_FLAGS)
+	@cmake -B build_debug -DCMAKE_BUILD_TYPE=Debug
 
 build-release:
-	@cmake -B build_release -DCMAKE_BUILD_TYPE=Release $(CMAKE_RELEASE_FLAGS)
+	@cmake -B build_release -DCMAKE_BUILD_TYPE=Release
 
 
 test-debug: build-debug

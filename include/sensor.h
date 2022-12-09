@@ -1,10 +1,10 @@
+#pragma once
 #include <string>
 
-class Sensor {
+class ISensor {
 public:
-    Sensor() = default;
-    ~Sensor() = default;
-    std::string value() {
-        return "Sensor";
-    }
+    virtual ~ISensor() = default;
+    virtual std::string getSensorName() = 0;
+    virtual std::string getSensorType() = 0;
+    virtual std::string getSensorValue() = 0;
 };

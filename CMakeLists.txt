@@ -15,36 +15,50 @@ include_directories(include)
 add_library(${PROJECT_NAME}_objs OBJECT
 	src/calculation.cpp
 	include/calculation.hpp
-	include/component.h
-	include/logacceptor.h
-	include/logsender.h
-	include/logwriter.h
-	include/serializer.h
+	# include/component.h
+	# include/logacceptor.h
+	# include/logsender.h
+	# include/logwriter.h
+	# include/serializer.h
 )
 
 # The Service
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}_objs )
 
-# Tests include sector
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gtest/CMakeLists.txt")
+  set(gtest_dir gtest)
+else()
+  set(gtest_dir ../gtest)
+endif()
+
+# GTests include sector
 include(FetchContent)
 FetchContent_Declare(
 	googletest
 	GIT_REPOSITORY https://github.com/google/googletest.git
 	GIT_TAG release-1.12.1
 )
-# For Win: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
+
+# GMck include sector
+# FetchContent_Declare(
+# 	googlemock
+# 	GIT_REPOSITORY https://github.com/google/googlemock.git
+# 	GIT_TAG release-1.7.0
+# )
+# set(gmock_force_shared_crt ON CACHE BOOL "" FORCE)
+# FetchContent_MakeAvailable(googlemock)
 
 # Unit Tests
 add_subdirectory(test)
 
-if(DEFINED ENV{PREFIX})
-	message(STATUS "Set install prefix: $ENV{PREFIX}")
-	file(TO_CMAKE_PATH "$ENV{PREFIX}" PREFIX_PATH)
-	set(CMAKE_INSTALL_PREFIX ${PREFIX_PATH})
-endif()
+# if(DEFINED ENV{PREFIX})
+# 	message(STATUS "Set install prefix: $ENV{PREFIX}")
+# 	file(TO_CMAKE_PATH "$ENV{PREFIX}" PREFIX_PATH)
+# 	set(CMAKE_INSTALL_PREFIX ${PREFIX_PATH})
+# endif()
 
 
 install(

@@ -1,23 +1,42 @@
-#include <iostream>
-#include <vector>
+#pragma once
+
 #include "component.h"
 #include "serializer.h"
 #include "sensor.h"
-// #include <libsensors/sensor.h>
+#include "config.h"
+#include "message.h"
+#include <vector>
 
 // класс собирателя логов
-class LogCollector : public IComponent {
- public:
-    LogCollector() = default;
-    ~LogCollector() override = default;
-    void set_serializer(Serializer serializer) {
-        serializer_ = serializer;
+template <typename Sensor = ISensor>
+class LogCollector : public Component {
+public:
+    LogCollector() {}
+    LogCollector(IConfig<std::string>* config) {
+        kName = config->get_value("log_collector", "name");
     }
-    void set_sensors(vector<Sensor> Sensors) {
-        sensors_ = sensors;
+    ~LogCollector() override {}
+    void set_serializer(ISerializer<std::string>* serializer) {
+        this->serializer = serializer;
+    }
+    void set_sensors(std::vector<Sensor>* sensors) {
+        this->sensors = sensors;
+    }
+
+    std::string getName() override {
+        // return kName;
+        return "LogCollector";
+    }
+
+    std::string getState() override {
+        return "Idle";
+    }
+
+    void SetIdlePolicy() override {
+        // установка политики Idle
     }
 private:
-    Serializer serializer_;
+    ISerializer<std::string>* serializer;
     std::string kName;
-    vector<Sensor> sensors;
+    std::vector<Sensor>* sensors;
 };

@@ -1,22 +1,10 @@
-#include <iostream>
-#include "message.h"
+#pragma once
+#include "message.h" 
 
-// интерфейс сериализатора
+template <typename T>
 class ISerializer {
 public:
     virtual ~ISerializer() = default;
-    virtual std::string serialize() = 0;
-};
-
-// класс сериализатора
-class Serializer : public ISerializer {
-public:
-    Serializer() = default;
-    ~Serializer() override = default;
-    std::string serialize(Message message) {
-        return "Serializer";
-    }
-    Message deserialize(std::string message) {
-        return Message();
-    }
+    virtual T serialize(IMessage* message) = 0;
+    virtual IMessage* deserialize(T message) = 0;
 };

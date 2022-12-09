@@ -1,8 +1,11 @@
-#include <iostream>
+#pragma once
+#include <string>
 
-// класс интерфейса компонента
-class IComponent {
+class Component {
+    typedef std::string state;
 public:
-    virtual ~IComponent() {}
-    virtual void Operation() = 0;
+    virtual ~Component() {}
+    virtual std::string getName() = 0;
+    virtual state getState() = 0;
+    virtual void SetIdlePolicy() = 0;
 };

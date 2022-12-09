@@ -1,25 +1,46 @@
-#include <iostream>
-#include <vector>
+#pragma once
+
 #include "component.h"
 #include "serializer.h"
 #include "socket.h"
-// #include <boost>
+#include "config.h"
+#include "message.h"
 
-// using boost::asio::ip::tcp::socket socket;
 
-// класс отправителя логов
-class LogCollector : public IComponent {
- public:
-    LogCollector() = default;
-    ~LogCollector() override = default;
-    void set_serializer(Serializer serializer) {
-        serializer_ = serializer;
+class LogSender : public Component {
+public:
+    LogSender() {}
+    LogSender(IConfig<std::string>* config) {
+        kName = config->get_value("log_sender", "name");
+        ip = config->get_value("log_sender", "ip");
+        port = config->get_value("log_sender", "port");
     }
-    void set_socket(Socket socket) {
-        socket_ = socket;
+    ~LogSender() override {}
+    void set_serializer(ISerializer<std::string>* serializer) {
+        this->serializer = serializer;
+    }
+
+    void set_socket(ISocket* socket) {
+        this->socket = socket;
+    }
+
+    std::string getName() override {
+        // return kName;
+        return "LogSender";
+    }
+
+    std::string getState() override {
+        return "Idle";
+    }
+
+    void SetIdlePolicy() override {
+        // установка политики Idle
     }
 private:
-    Serializer serializer_;
+    ISerializer<std::string>* serializer;
     std::string kName;
-    Socket socket_;
+    ISocket* socket;
+    
+    std::string ip;
+    std::string port;
 };
