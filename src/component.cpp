@@ -1,6 +1,7 @@
 #include <sensors-c++/sensors.h>
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 class LogColector {
  private:
@@ -13,25 +14,28 @@ class LogColector {
 
     ~LogColector() {};
 
-    void print_bus() {
-        std::vector<sensors::feature> temp;
-        std::vector<sensors::subfeature> temp_sub;
+    std::vector<sensors::chip_name> &output() {
+        return bus;
+    }
+};
+
+template<class Colector>
+class LogSender {
+ public:
+    LogSender() {};
+    ~LogSender() {};
+
+    void output_sock(Colector instance) {
+        auto bus = instance.output();
         for (size_t i = 0; i < bus.size(); i++) {
             std::cout<<bus[i].name()<<std::endl;
-            temp = bus[i].features();
-            for (size_t j = 0; j < temp.size(); j++) {
-                std::cout<<temp[j].number()<<std::endl;
-                temp_sub = temp[j].subfeatures();
-                for (size_t k = 0; k < temp_sub.size(); k++) {
-                     std::cout<<temp_sub[k].read()<<std::endl;
-                }
-            }
         }
     }
 };
 
 int main() {
     LogColector a;
-    a.print_bus();
+    LogSender<LogColector> b;
+    b.output_sock(a);
     return 0;
 }
